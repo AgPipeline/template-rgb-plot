@@ -15,6 +15,7 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 4. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
 5. [Generate](#generate): Run `generate.py` to create a Dockerfile
 6. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
+7. [Finishing](#finishing): Finish up your development efforts
 
 ### Setup your repo <a name="setup"/>
 The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
@@ -116,3 +117,11 @@ The container can then load the images from the file system directly, without ha
 The parameters after the Docker image name are all relative to the target folder specified with this command line parameter. 
 
 Once the image files have been processed, the resulting CSV file(s) will be located in the folder at `/user/myself` (in this example).
+
+### Finishing up <a name="finishing" />
+Now that you're created your algorithm, there's a few more things to take care of:
+
+1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
+2. Update the README.md file, filling out the sections with information on your algorithm; others will want to know so they can use it!
+3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
+
