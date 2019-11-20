@@ -101,7 +101,8 @@ def check_environment() -> bool:
         if not hasattr(algorithm_rgb, one_attr) or not getattr(algorithm_rgb, one_attr, None):
             bad_values.append(one_attr)
     if bad_values:
-        print("The following variables are missing or empty when it would be better to have them defined and filled in: %s" % ','.join(bad_values))
+        print("The following variables are missing or empty when it would be better to have them defined and filled in: %s" % \
+              ','.join(bad_values))
         print("Continuing to generate files ...")
 
     return True
@@ -134,6 +135,8 @@ def generate_files() -> int:
         print("Exception caught while attempting to create Docker build file: %s" % str(ex))
         print("Stopping build file generation")
         return -2
+
+    return 0
 
 
 # Make the call to generate the files
