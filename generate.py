@@ -124,7 +124,7 @@ def generate_files() -> int:
     # Create the Dockerfile
     try:
         with open(DOCKERFILE_NAME, "w") as out_file:
-            out_file.write('# automatically generated: %s' % datetime.datetime.now().isoformat())
+            out_file.write('# automatically generated: %s\n' % datetime.datetime.now().isoformat())
             for line in DOCKERFILE_CONTENTS:
                 if line.startswith('LABEL maintainer='):
                     out_file.write("LABEL maintainer=\"{0} <{1}>\"\n".format(algorithm_rgb.ALGORITHM_AUTHOR,

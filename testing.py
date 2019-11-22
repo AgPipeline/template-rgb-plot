@@ -33,10 +33,12 @@ def _get_variables_header_fields() -> str:
     for idx, variable_name in enumerate(variables):
         variable_header = variable_name
         if idx < labels_len:
-            variable_header += ' %s' % labels[idx]
+            variable_header += ' - %s' % labels[idx]
         if idx < units_len:
             variable_header += ' (%s)' % units[idx]
         headers += variable_header + ','
+
+    return headers
 
 
 def print_usage():
