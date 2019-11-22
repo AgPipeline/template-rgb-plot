@@ -30,7 +30,7 @@ def _get_variables_header_fields() -> str:
         sys.stderr.write("  continuing processing")
 
     headers = ''
-    for idx, variable_name in variables:
+    for idx, variable_name in enumerate(variables):
         variable_header = variable_name
         if idx < labels_len:
             variable_header += ' %s' % labels[idx]
