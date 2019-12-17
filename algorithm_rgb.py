@@ -5,13 +5,13 @@
 import numpy as np
 
 # Definitions
-# Please replace these definition's values with the correct ones
+# Please replace these definitions' values with the correct ones
 VERSION = '1.0'
 
 # Information on the creator of this algorithm
 ALGORITHM_AUTHOR = 'Unknown'
 ALGORITHM_AUTHOR_EMAIL = ''
-ALGORITHM_CONTRIBUTORS = ["Zongyang Li"]
+ALGORITHM_CONTRIBUTORS = [""]
 
 ALGORITHM_NAME = 'my nifty one'
 ALGORITHM_DESCRIPTION = 'This algorithm calculates the niftyness of RGB plot-level images'
