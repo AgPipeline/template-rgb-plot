@@ -71,6 +71,8 @@ A testing script named `testing.py` is provided for testing your algorithm.
 What isn't provided in the template repository are the plot-level RGB images to test against.
 It's expected that you will either provide the images or use a standard set that can be downloaded from [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing).
 
+The testing script requires `numpy` and `gdal` to be installed on the testing system.
+
 The testing script expects to have either a list of source plot image files, or a folder name, or both specified on the command line.
 
 For example, if your files reside in `/user/myself/test_images` the command to test could be the following:

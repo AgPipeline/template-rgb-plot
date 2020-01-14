@@ -11,6 +11,36 @@ import gdal
 import algorithm_rgb
 
 
+def _get_variables_header_fields() -> str:
+    """Returns a string representing the variable header fields
+    Return:
+        Returns a string representing the variables' header fields
+    """
+    variables = algorithm_rgb.VARIABLE_NAMES.split(',')
+    labels = algorithm_rgb.VARIABLE_LABELS.split(',')
+    labels_len = len(labels)
+    units = algorithm_rgb.VARIABLE_UNITS.split(',')
+    units_len = len(units)
+
+    if labels_len != len(variables):
+        sys.stderr.write("The number of defined labels doesn't match the number of defined variables")
+        sys.stderr.write("  continuing processing")
+    if units_len != len(variables):
+        sys.stderr.write("The number of defined units doesn't match the number of defined variables")
+        sys.stderr.write("  continuing processing")
+
+    headers = ''
+    for idx, variable_name in enumerate(variables):
+        variable_header = variable_name
+        if idx < labels_len:
+            variable_header += ' - %s' % labels[idx]
+        if idx < units_len:
+            variable_header += ' (%s)' % units[idx]
+        headers += variable_header + ','
+
+    return headers
+
+
 def print_usage():
     """Displays information on how to use this script
     """
@@ -103,7 +133,7 @@ def process_files():
     """
     argc = len(sys.argv)
     if argc:
-        print("Filename," + algorithm_rgb.VARIABLE_NAMES)
+        print("Filename," + _get_variables_header_fields())
         for idx in range(1, argc):
             cur_path = sys.argv[idx]
             if not os.path.isdir(cur_path):
