@@ -14,7 +14,7 @@ DOCKERFILE_NAME = 'Dockerfile'
 
 # Template contents of the Docker build file
 DOCKERFILE_CONTENTS = [
-    'FROM iagdrone/drone-base-image:1.2',
+    'FROM agdrone/drone-base-image:1.2',
     'LABEL maintainer="Someone <someone@example.com>"',
     '',
     'COPY requirements.txt packages.txt /home/extractor/',
