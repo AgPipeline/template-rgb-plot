@@ -81,10 +81,16 @@ The listed modules will then be installed as part of the Docker build process.
 If there are other dependencies needed by your algorithm, add them to the `packages.txt` file.
 The packages listed will be installed using `apt-get` as part of the Docker build process.
 
+### Test your algorithm <a name="test"/>
 A testing script named `testing.py` is provided for testing your algorithm.
 It checks whether the configuration is correct for testing the files by making sure that the arguments in algorithm_rgb as well as the image files are in the correct format
 What isn't provided in the template repository are the plot-level RGB images to test against.
 It's expected that you will either provide the images or use a standard set that can be downloaded from [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing).
+
+The testing script requires `numpy` and `gdal` to be installed on the testing system.
+
+For example, if your files reside in `/user/myself/test_images` the command to test could be the following:
+```./testing.py /user/myself/test_images```
 
 The testing script expects to have either a list of source plot image files, or a folder name, or both specified on the command line.
 
@@ -99,7 +105,7 @@ Please note that there may be naming requirements for pushing images to a reposi
 
 **Testing the Docker image**
 
-A sample command line to run the image could be:
+using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
 ```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" --metadata "mnt/08f445ef-b8f9-421a-acf1-8b8c206c1bb8_metadata_cleaned.json "/mnt/images"```
 
@@ -122,14 +128,7 @@ Once the image files have been processed, the resulting CSV file(s) will be loca
 The result.json file should tell you what errors were found in the checks from testing.py (make sure to check the output in the CSV file(s) 
 even if the result.json file does not find errors)
 
-### Testing without a container:
-
-The first option for the testing script requires `numpy` and `gdal` to be installed on the testing system.
-
-For example, if your files reside in `/user/myself/test_images` the command to test could be the following:
-```./testing.py /user/myself/test_images```
-
-### Testing with a container: 
+### (OPTIONAL) Testing the Docker container: 
 Now you have built your docker image. In order to run the testing.py file from within a container, do the following command:
 
 ```docker run --rm -it -v `pwd`:/mnt --entrypoint bash my_algorithm:latest```
