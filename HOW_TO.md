@@ -12,10 +12,12 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
 2. [Definitions](#definitions): Fill in and modify the definitions in the algorithm_rgb.py file
 3. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
-4. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
-5. [Generate](#generate): Run `generate.py` to create a Dockerfile
+4. [Generate](#generate): Run `generate.py` to create a Dockerfile
+5. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
 6. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
-7. [Finishing](#finishing): Finish up your development efforts
+(Optional) 7. [Testing Your docker image](#test_docker):
+(Optional) 8. [Testing Image Production](#production)
+9. [Finishing](#finishing): Finish up your development efforts
 
 ### Setup your repo <a name="setup"/>
 The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
@@ -120,9 +122,19 @@ Breaking apart this command line, we have the following pieces:
 - `/mnt/images` mounts the sample plot images to the running docker container
 
 Output should be in the format of image name and calculated value for that image on a single line for each of the images
-in the images folder
+in the images folder. Example output from the images in the [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
+is contained below for plot images folder, which is titled sample_plot_images: 
 
-### (OPTIONAL) Testing Image Production <a name="produce_docker" />
+Filename,size of image channels -  (pixels),
+/mnt/sample_plot_images/rgb_17_7_W.tif,7000
+/mnt/sample_plot_images/rgb_40_11_W.tif,7000
+/mnt/sample_plot_images/rgb_6_1_E.tif,7000
+/mnt/sample_plot_images/rgb_1_2_E.tif,7000
+/mnt/sample_plot_images/rgb_33_8_W.tif,7000
+/mnt/sample_plot_images/rgb_5_11_W.tif,7000
+
+
+### (OPTIONAL) Testing Image Production <a name="production" />
 
 Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
