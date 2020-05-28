@@ -104,7 +104,25 @@ Please refer to the Docker documentation for additional information on building 
 Once the image is built, you can run it locally or push it to an image repository, such as [DockerHub](https://hub.docker.com/).
 Please note that there may be naming requirements for pushing images to a repository.
 
-### (OPTIONAL) Producing the Docker Image <a name="produce_docker" />
+### (OPTIONAL) Testing your Docker Image <a name="test_docker">
+
+In order to test your docker image, you can use the command:
+
+```docker run --rm -it -v `pwd`:/mnt --entrypoint /mnt/testing.py my_algorithm:latest /mnt/images```
+
+Breaking apart this command line, we have the following pieces:
+- `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
+- `--rm` tells Docker to remove the container (an image instance) when it's completed
+- `it` allows you to have a stdin stream and terminal driver added to the docker container allowing an interactive session
+- `-v "pwd":/mnt` bind mounts a volume to the docker container so that the current working directory (given by pwd) will be copied into the volume
+- `--entrypoint /mnt/testing.py` defines the Docker container that will be run, with testing.py mounted to that container 
+- `my_algorithm:latest` is the image to run (the running image is known as a *container*)
+- `/mnt/images` mounts the sample plot images to the running docker container
+
+Output should be in the format of image name and calculated value for that image on a single line for each of the images
+in the images folder
+
+### (OPTIONAL) Testing Image Production <a name="produce_docker" />
 
 Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
