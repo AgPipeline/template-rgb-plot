@@ -15,8 +15,8 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 4. [Generate](#generate): Run `generate.py` to create a Dockerfile
 5. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
 6. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
-(Optional) 7. [Testing Your docker image](#test_docker):
-(Optional) 8. [Testing Image Production](#production)
+7. [Testing Your docker image](#test_docker): OPTIONAL
+8. [Testing Image Production](#production): OPTIONAL
 9. [Finishing](#finishing): Finish up your development efforts
 
 ### Setup your repo <a name="setup"/>
@@ -71,6 +71,8 @@ Be sure to save your changes.
 ### Generate the docker build command file <a name="generate" />
 It's time to generate the Dockerfile that's used to build Docker images.
 
+Docker images can be used as part of a workflow
+
 To assist in this effort we've provided a script named `generate.py` to produce a file containing the Docker commands needed.
 Running this script will not only produce a Docker command file, named `Dockerfile` but also two other files that can be used to install additional dependencies your algorithm needs.
 These two other files are named `requirements.txt` for additional Python modules and `packages.txt` for other dependencies.
@@ -106,7 +108,7 @@ Please refer to the Docker documentation for additional information on building 
 Once the image is built, you can run it locally or push it to an image repository, such as [DockerHub](https://hub.docker.com/).
 Please note that there may be naming requirements for pushing images to a repository.
 
-### (OPTIONAL) Testing your Docker Image <a name="test_docker">
+### (OPTIONAL) Using Docker to run testing.py <a name="test_docker">
 
 In order to test your docker image, you can use the command:
 
@@ -121,8 +123,8 @@ Breaking apart this command line, we have the following pieces:
 - `my_algorithm:latest` is the image to run (the running image is known as a *container*)
 - `/mnt/images` mounts the sample plot images to the running docker container
 
-Output should be in the format of image name and calculated value for that image on a single line for each of the images
-in the images folder. Example output from the images in the [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
+Output should be in the format of image name and calculated value for that image on a single line for each of the images in the images folder.
+Example output from the images in the [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
 is contained below for plot images folder, which is titled sample_plot_images: 
 
 Filename,size of image channels -  (pixels),
