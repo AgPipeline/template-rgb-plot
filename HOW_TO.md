@@ -68,7 +68,7 @@ Modify the rest of the file as necessary if there are additional import statemen
 
 Be sure to save your changes.
 
-### Generate the docker build command file <a name="generate" />
+### Generate the Docker build command file <a name="generate" />
 It's time to generate the Dockerfile that's used to build Docker images.
 
 Docker images can be used as part of a workflow
@@ -108,7 +108,7 @@ Please refer to the Docker documentation for additional information on building 
 Once the image is built, you can run it locally or push it to an image repository, such as [DockerHub](https://hub.docker.com/).
 Please note that there may be naming requirements for pushing images to a repository.
 
-### (OPTIONAL) Using Docker to run testing.py <a name="test_docker">
+#### (OPTIONAL) Using Docker to run testing.py <a name="test_docker">
 
 In order to test your docker image, you can use the command:
 
@@ -127,16 +127,16 @@ Output should be in the format of image name and calculated value for that image
 Example output from the images in the [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
 is contained below for plot images folder, which is titled sample_plot_images: 
 
-Filename,size of image channels -  (pixels),
+```Filename,size of image channels -  (pixels),
 /mnt/sample_plot_images/rgb_17_7_W.tif,7000
 /mnt/sample_plot_images/rgb_40_11_W.tif,7000
 /mnt/sample_plot_images/rgb_6_1_E.tif,7000
 /mnt/sample_plot_images/rgb_1_2_E.tif,7000
 /mnt/sample_plot_images/rgb_33_8_W.tif,7000
 /mnt/sample_plot_images/rgb_5_11_W.tif,7000
+```
 
-
-### (OPTIONAL) Testing Image Production <a name="production" />
+#### (OPTIONAL) Production Testing of Image <a name="production" />
 
 Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
