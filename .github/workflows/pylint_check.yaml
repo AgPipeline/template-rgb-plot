@@ -31,6 +31,8 @@ jobs:
       - name: Fetch/update setuptools
         run: python3 -m pip install --upgrade --no-cache-dir setuptools
         id: setuptools-install
+      - name: Update python-apt
+        run: sudo apt-get update python-apt
       - name: Fetch/update pylint
         run: python3 -m pip install --upgrade --no-cache-dir pylint
         id: pylint-install
@@ -42,7 +44,7 @@ jobs:
         id: find-python-files
       - name: Install system requirements
         shell: bash
-        run: 'sudo apt-get update && sudo apt-get install -y python3-gdal gdal-bin libgdal-dev gcc g++ python3.7-dev'
+        run: 'sudo apt-get install -y python3-gdal gdal-bin libgdal-dev gcc g++ python3.7-dev'
         id: install-system-reqs
       - name: Install Python numpy
         shell: bash
