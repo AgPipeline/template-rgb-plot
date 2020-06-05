@@ -12,10 +12,12 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
 2. [Definitions](#definitions): Fill in and modify the definitions in the algorithm_rgb.py file
 3. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
-4. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
-5. [Generate](#generate): Run `generate.py` to create a Dockerfile
+4. [Generate](#generate): Run `generate.py` to create a Dockerfile
+5. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
 6. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
-7. [Finishing](#finishing): Finish up your development efforts
+7. [Testing Your docker image](#test_docker): OPTIONAL
+8. [Testing Image Production](#production): OPTIONAL
+9. [Finishing](#finishing): Finish up your development efforts
 
 ### Setup your repo <a name="setup"/>
 The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
@@ -66,20 +68,10 @@ Modify the rest of the file as necessary if there are additional import statemen
 
 Be sure to save your changes.
 
-### Test your algorithm <a name="test" />
-A testing script named `testing.py` is provided for testing your algorithm.
-What isn't provided in the template repository are the plot-level RGB images to test against.
-It's expected that you will either provide the images or use a standard set that can be downloaded from [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing).
+### Generate the Docker build command file <a name="generate" />
+It's time to generate the Dockerfile that's used to build Docker images.
 
-The testing script requires `numpy` and `gdal` to be installed on the testing system.
-
-The testing script expects to have either a list of source plot image files, or a folder name, or both specified on the command line.
-
-For example, if your files reside in `/user/myself/test_images` the command to test could be the following:
-```./testing.py /user/myself/test_images```
-
-### Generate the docker build command file <a name="generate" />
-Now that you have created your algorithm and tested it out to your satisfaction, it's time to make a Docker image so that it can run as part of a workflow.
+Docker images can be used as part of a workflow
 
 To assist in this effort we've provided a script named `generate.py` to produce a file containing the Docker commands needed.
 Running this script will not only produce a Docker command file, named `Dockerfile` but also two other files that can be used to install additional dependencies your algorithm needs.
@@ -93,8 +85,22 @@ The listed modules will then be installed as part of the Docker build process.
 If there are other dependencies needed by your algorithm, add them to the `packages.txt` file.
 The packages listed will be installed using `apt-get` as part of the Docker build process.
 
+### Test your algorithm <a name="test"/>
+A testing script named `testing.py` is provided for testing your algorithm.
+It checks whether the configuration is correct for testing the files by making sure that the arguments in algorithm_rgb as well as the image files are in the correct format
+
+The testing script requires `numpy` and `gdal` to be installed on the testing system.
+
+If your files reside in `/user/myself/test_images` the command to test could be the following:
+```./testing.py /user/myself/test_images```
+
+What isn't provided in the template repository are the plot-level RGB images to test against.
+It's expected that you will either provide the images or use a standard set that can be downloaded from [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing).
+
+The testing script expects to have either a list of source plot image files, or a folder name, or both specified on the command line.
+
 ### Create the Docker image <a name="build_docker" />
-Now that you have generated your `Dockerfile` and specified any Python modules and other packages needed by your algorithm, you are ready to create a Docker image of your algorithm.
+Now that you have generated your `Dockerfile` as described [above](#generate) and specified any Python modules and other packages needed by your algorithm, you are ready to create a Docker image of your algorithm.
 
 A sample Docker build command could be: ```docker build -t my_algorithm:latest ./```
 Please refer to the Docker documentation for additional information on building a docker image.
@@ -102,23 +108,57 @@ Please refer to the Docker documentation for additional information on building 
 Once the image is built, you can run it locally or push it to an image repository, such as [DockerHub](https://hub.docker.com/).
 Please note that there may be naming requirements for pushing images to a repository.
 
-**Testing the Docker image**
-Using the same image setup as used when [testing your algorithm](#test), a sample command line to run the image could be:
-```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" "/mnt/images"```
+#### (OPTIONAL) Using Docker to run testing.py <a name="test_docker">
+
+In order to test your docker image, you can use the command:
+
+```docker run --rm -it -v `pwd`:/mnt --entrypoint /mnt/testing.py my_algorithm:latest /mnt/images```
 
 Breaking apart this command line, we have the following pieces:
-- `docker run` tells Docker to run an instance of the image (specified later in the command)
+- `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
+- `--rm` tells Docker to remove the container (an image instance) when it's completed
+- `it` allows you to have a stdin stream and terminal driver added to the docker container allowing an interactive session
+- `-v "pwd":/mnt` bind mounts a volume to the docker container so that the current working directory (given by pwd) will be copied into the volume
+- `--entrypoint /mnt/testing.py` defines the Docker container that will be run, with testing.py mounted to that container 
+- `my_algorithm:latest` is the image to run (the running image is known as a *container*)
+- `/mnt/images` mounts the sample plot images to the running docker container
+
+Output should be in the format of image name and calculated value for that image on a single line for each of the images in the images folder.
+Example output from the images in the [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
+is contained below for plot images folder, which is titled sample_plot_images: 
+
+```Filename,size of image channels -  (pixels),
+/mnt/sample_plot_images/rgb_17_7_W.tif,7000
+/mnt/sample_plot_images/rgb_40_11_W.tif,7000
+/mnt/sample_plot_images/rgb_6_1_E.tif,7000
+/mnt/sample_plot_images/rgb_1_2_E.tif,7000
+/mnt/sample_plot_images/rgb_33_8_W.tif,7000
+/mnt/sample_plot_images/rgb_5_11_W.tif,7000
+```
+
+#### (OPTIONAL) Production Testing of Image <a name="production" />
+
+Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
+
+```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/images"```
+
+Breaking apart this command line, we have the following pieces:
+- `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
 - `--rm` tells Docker to remove the container (an image instance) when it's completed
 - `--mount "src=/user/myself,target=/mnt,type=bind"` specifies the */user/myself* path is to be made available as */mnt* in the container
 - `my_algorithm:latest` is the image to run (the running image is known as a *container*)
 - `--working_space "/mnt"` lets the software in the container know where its working disk space is located; files are created here
+- `--metadata "mnt/experiment.yml"` specifies that the metadata file experiment.yml will be made available to the container
 - `"/mnt/images"` specifies where the plot-level image files are located
 
 The `--mount` command line parameter is important since it allows the running container to access the local file system.
 The container can then load the images from the file system directly, without having to perform any copies.
-The parameters after the Docker image name are all relative to the target folder specified with this command line parameter. 
+The parameters after the Docker image name are all relative to the target folder specified with this command line parameter.
 
 Once the image files have been processed, the resulting CSV file(s) will be located in the folder at `/user/myself` (in this example).
+
+The result.json file should tell you what errors were found in the checks from testing.py (make sure to check the output in the CSV file(s) 
+even if the result.json file does not find errors)
 
 ### Finishing up <a name="finishing" />
 Now that you're created your algorithm, there's a few more things to take care of:
