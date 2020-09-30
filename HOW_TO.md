@@ -1,6 +1,11 @@
 # How To Use This Template
 This document describes how to use this transformer template for your custom algorithm processing plot-level RGB data.
 
+## Additional Information
+Additional technical information can be found on our [GitHub IO page](https://github.com/AgPipeline/AgPipeline.github.io/blob/master/transformers/template_rgb_plot.md) for this repository.
+
+If you are not familiar with working with an image's alpha channel, there is information and examples on [how to do that](https://github.com/AgPipeline/AgPipeline.github.io/blob/master/transformers/template_rgb_plot.md#alpha_channel) on the technical page.
+
 ## Assumptions
 It is assumed that:
 - you are generating a Docker image containing your algorithm and that you have Docker installed on your computer
@@ -95,7 +100,13 @@ If your files reside in `/user/myself/test_images` the command to test could be 
 ```./testing.py /user/myself/test_images```
 
 What isn't provided in the template repository are the plot-level RGB images to test against.
-It's expected that you will either provide the images or use a standard set that can be downloaded from [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing).
+It's expected that you will either provide the images or use a standard set that can be downloaded.
+The following commands can be used to retrieve and extract the test images:
+```bash
+mkdir test_images
+curl -X GET https://de.cyverse.org/dl/d/4108BB75-AAA3-48E1-BBD4-E10B06CADF54/sample_plot_images.zip -o test_images/sample_plot_images.zip
+unzip test_images/sample_plot_images.zip -d test_images/
+```
 
 The testing script expects to have either a list of source plot image files, or a folder name, or both specified on the command line.
 
@@ -112,7 +123,7 @@ Please note that there may be naming requirements for pushing images to a reposi
 
 In order to test your docker image, you can use the command:
 
-```docker run --rm -it -v `pwd`:/mnt --entrypoint /mnt/testing.py my_algorithm:latest /mnt/images```
+```docker run --rm -it -v `pwd`:/mnt --entrypoint /mnt/testing.py my_algorithm:latest /mnt/test_images```
 
 Breaking apart this command line, we have the following pieces:
 - `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
@@ -121,26 +132,25 @@ Breaking apart this command line, we have the following pieces:
 - `-v "pwd":/mnt` bind mounts a volume to the docker container so that the current working directory (given by pwd) will be copied into the volume
 - `--entrypoint /mnt/testing.py` defines the Docker container that will be run, with testing.py mounted to that container 
 - `my_algorithm:latest` is the image to run (the running image is known as a *container*)
-- `/mnt/images` mounts the sample plot images to the running docker container
+- `/mnt/test_images` mounts the sample plot images to the running docker container
 
 Output should be in the format of image name and calculated value for that image on a single line for each of the images in the images folder.
-Example output from the images in the [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
-is contained below for plot images folder, which is titled sample_plot_images: 
+Example output from the images in the [sample image set]() is shown below for the plot sample images folder, which is titled test_images: 
 
 ```Filename,size of image channels -  (pixels),
-/mnt/sample_plot_images/rgb_17_7_W.tif,7000
-/mnt/sample_plot_images/rgb_40_11_W.tif,7000
-/mnt/sample_plot_images/rgb_6_1_E.tif,7000
-/mnt/sample_plot_images/rgb_1_2_E.tif,7000
-/mnt/sample_plot_images/rgb_33_8_W.tif,7000
-/mnt/sample_plot_images/rgb_5_11_W.tif,7000
+/mnt/test_images/rgb_17_7_W.tif,7000
+/mnt/test_images/rgb_40_11_W.tif,7000
+/mnt/test_images/rgb_6_1_E.tif,7000
+/mnt/test_images/rgb_1_2_E.tif,7000
+/mnt/test_images/rgb_33_8_W.tif,7000
+/mnt/test_images/rgb_5_11_W.tif,7000
 ```
 
 #### (OPTIONAL) Production Testing of Image <a name="production" />
 
 Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
-```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/images"```
+```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/test_images"```
 
 Breaking apart this command line, we have the following pieces:
 - `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
@@ -149,7 +159,7 @@ Breaking apart this command line, we have the following pieces:
 - `my_algorithm:latest` is the image to run (the running image is known as a *container*)
 - `--working_space "/mnt"` lets the software in the container know where its working disk space is located; files are created here
 - `--metadata "mnt/experiment.yml"` specifies that the metadata file experiment.yml will be made available to the container
-- `"/mnt/images"` specifies where the plot-level image files are located
+- `"/mnt/test_images"` specifies where the plot-level image files are located
 
 The `--mount` command line parameter is important since it allows the running container to access the local file system.
 The container can then load the images from the file system directly, without having to perform any copies.
