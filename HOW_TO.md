@@ -2,9 +2,9 @@
 This document describes how to use this transformer template for your custom algorithm processing plot-level RGB data.
 
 ## Additional Information
-Additional technical information can be found on our [GitHub IO page](https://github.com/AgPipeline/AgPipeline.github.io/blob/master/transformers/template_rgb_plot.md) for this repository.
+Additional technical information can be found on our [GitHub IO page](https://agpipeline.github.io/transformers/template_rgb_plot) for this repository.
 
-If you are not familiar with working with an image's alpha channel, there is information and examples on [how to do that](https://github.com/AgPipeline/AgPipeline.github.io/blob/master/transformers/template_rgb_plot.md#alpha_channel) on the technical page.
+If you are not familiar with working with an image's alpha channel, there is information and examples on [how to do that](https://agpipeline.github.io/transformers/template_rgb_plot#alpha_channel) on the technical page.
 
 ## Assumptions
 It is assumed that:
