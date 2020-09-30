@@ -1,16 +1,30 @@
-# How To Use This Template
-This document describes how to use this transformer template for your custom algorithm processing plot-level RGB data.
+# [{{pkg.name}}]({{ pkg.url }})
+
+## Description
+This is an rgb image-based template that can be used to test plot-level algorithms.
+
+### Methods
+
+{{ pkg.methods }}
 
 ## Assumptions
 It is assumed that:
-- you are generating a Docker image containing your algorithm and that you have Docker installed on your computer
-- are familiar with GitHub template repositories, or know how to use `git`
+
+* An image folder is located in the root of this directory that will provide images for the calculate()
+function to process. Sample plot images can be found [here](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view)
+
+* You are generating a Docker image containing your algorithm and that you have Docker installed on your
+computer
+
+* You are familiar with Github template repositories, or know how to use git
+
 
 ## Steps to take
 The following steps can be taken to develop your algorithm for inclusion into a processing pipeline.
 
 1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
-2. [Definitions](#definitions): Fill in and modify the definitions in the algorithm_rgb.py file
+2. [Definitions](#definitions): Fill in and modify the definitions in the algorithm_rgb.py file and then run the command
+    "npx @appnest/readme generate" to generate a readme
 3. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
 4. [Generate](#generate): Run `generate.py` to create a Dockerfile
 5. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
@@ -25,6 +39,11 @@ In GitHub this is easy, browse to this [repository](https://github.com/AgPipelin
 You will be led through the steps necessary to create a clone in a location of your choosing.
 
 If you are not on GitHub, you will need to setup your `git` environment and clone the repository.
+
+
+## Sample Transformers
+* [transformer-rgb-indices](https://github.com/AgPipeline/transformer-rgb-indices)
+
 
 ### Fill in your definitions <a name="definitions" />
 To fill in the needed definitions, first open the `algorithm_rgb.py` file in your favorite editor.
