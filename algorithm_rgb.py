@@ -2,24 +2,27 @@
 """
 
 # Importing modules. Please add any additional import statements below
+import json
 import numpy as np
+
+metadata = json.load(open("codemeta.json", 'r'))
 
 # Definitions
 # Please replace these definitions' values with the correct ones
-VERSION = '1.0'
+VERSION = metadata["version"]
 
 # Information on the creator of this algorithm
-ALGORITHM_AUTHOR = 'Unknown'
-ALGORITHM_AUTHOR_EMAIL = ''
-ALGORITHM_CONTRIBUTORS = [""]
+ALGORITHM_AUTHOR = metadata["author(s)"]
+ALGORITHM_AUTHOR_EMAIL = metadata["author_emails"]
+ALGORITHM_CONTRIBUTORS = metadata["contributors"]
 
-ALGORITHM_NAME = 'my nifty one'
-ALGORITHM_DESCRIPTION = 'This algorithm calculates the niftyness of RGB plot-level images'
+ALGORITHM_NAME = metadata["algorithm_name"]
+ALGORITHM_DESCRIPTION = metadata["algorithm_description"]
 
 # Citation information for publication (more information in HOW_TO.md)
-CITATION_AUTHOR = 'unknown'
-CITATION_TITLE = ''
-CITATION_YEAR = ''
+CITATION_AUTHOR = metadata["citation_author"]
+CITATION_TITLE = metadata["citation_title"]
+CITATION_YEAR = metadata["citation_year"]
 
 # The name of one or more variables returned by the algorithm, separated by commas (more information in HOW_TO.md)
 # If only one name is specified, no comma's are used.
@@ -27,16 +30,16 @@ CITATION_YEAR = ''
 # all white space is kept intact; don't add any extra whitespace since it may cause name comparisons
 # to fail.
 # !! Replace the content of this string with your variable names
-VARIABLE_NAMES = 'size of image channels'
+VARIABLE_NAMES = metadata["variable_names"]
 
 # Variable units matching the order of VARIABLE_NAMES, also comma-separated.
 # For each variable name in VARIABLE_NAMES add the unit of measurement the value represents.
 # !! Replace the content of this string with your variables' unit
-VARIABLE_UNITS = 'pixels'
+VARIABLE_UNITS = metadata["variable_units"]
 
 # Variable labels matching the order of VARIABLE_NAMES, also comma-separated.
 # This is an optional definition and can be left empty.
-VARIABLE_LABELS = ''
+VARIABLE_LABELS = metadata["variable_labels"]
 
 # Optional override for the generation of a BETYdb compatible csv file
 # Set to False to suppress the creation of a compatible file

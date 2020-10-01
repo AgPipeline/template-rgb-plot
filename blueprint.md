@@ -1,7 +1,7 @@
 # [{{pkg.name}}]({{ pkg.url }})
 
 ## Description
-This is an rgb image-based template that can be used to test plot-level algorithms.
+{{ pkg.algorithm_description }}
 
 ### Methods
 
@@ -18,59 +18,20 @@ computer
 
 * You are familiar with Github template repositories, or know how to use git
 
+## Sample Transformers
+* [transformer-rgb-indices](https://github.com/AgPipeline/transformer-rgb-indices)
 
 ## Steps to take
 The following steps can be taken to develop your algorithm for inclusion into a processing pipeline.
 
-1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
-2. [Definitions](#definitions): Fill in and modify the definitions in the algorithm_rgb.py file and then run the command
-    "npx @appnest/readme generate" to generate a readme
-3. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
-4. [Generate](#generate): Run `generate.py` to create a Dockerfile
-5. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
-6. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
-7. [Testing Your docker image](#test_docker): OPTIONAL
-8. [Testing Image Production](#production): OPTIONAL
-9. [Finishing](#finishing): Finish up your development efforts
+1. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
+2. [Generate](#generate): Run `generate.py` to create a Dockerfile
+3. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
+4. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
+5. [Testing Your docker image](#test_docker): OPTIONAL
+6. [Testing Image Production](#production): OPTIONAL
+7. [Finishing](#finishing): Finish up your development efforts
 
-### Setup your repo <a name="setup"/>
-The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
-In GitHub this is easy, browse to this [repository](https://github.com/AgPipeline/template-rgb-plot) and click the `Use this template` button.
-You will be led through the steps necessary to create a clone in a location of your choosing.
-
-If you are not on GitHub, you will need to setup your `git` environment and clone the repository.
-
-
-## Sample Transformers
-* [transformer-rgb-indices](https://github.com/AgPipeline/transformer-rgb-indices)
-
-
-### Fill in your definitions <a name="definitions" />
-To fill in the needed definitions, first open the `algorithm_rgb.py` file in your favorite editor.
-
-If you are modifying your existing code, you should consider updating the version number definition: `VERSION`.
-It's assumed that [Semantic Version numbers](https://semver.org/) will be used, but any methodology can be used.
-
-Fill in the algorithm definitions with the creator(s) of the algorithm: `ALGORITHM_AUTHOR`, `ALGORITHM_AUTHOR_EMAIL`, `ALGORITHM_NAME`, and `ALGORITHM_DESCRIPTION`.
-Multiple names for `ALGORITHM_AUTHOR` and multiple emails for `ALGORITHM_AUTHOR_EMAIL` are supported.
-It's best if only one algorithm name is used, but call it what you want.
-The safest algorithm naming convention to use is to convert any white-space or other characters to periods (.) which allows different systems to more-easily change the name, if needed.
-
-Next fill in the citation information that will be used in the generated CSV file: `CITATION_AUTHOR`, `CITATION_TITLE`, and `CITATION_YEAR`.
-Be sure to enter the citation information accurately since some systems may expect exact matches.
-
-The names of the variables are used to determine the number of returned values your algorithm produces: `VARIABLE_NAMES`.
-Enter each variable name for each returned value, in the order they are returned, separated by a comma.
-Be sure to enter them accurately since some systems may expect exact matches.
-It is considered an error to have a mismatch between the number of variables names and the number of returned values.
-
-A CSV file suitable for ingestion to [BETYdb](https://www.betydb.org/) is generated depending upon the value of the `WRITE_BETYDB_CSV` variable.
-Setting this value to `False` will suppress the generation of this file by default.
-
-A CSV file suitable for ingestion to [TERRA REF Geostreams](https://docs.terraref.org/user-manual/data-products/environmental-conditions) is generated depending upon the value of the `WRITE_GEOSTREAMS_CSV` variable.
-Setting this value to `False` will suppress the generation of this file by default.
-
-Be sure to save your changes.
 
 ### Add your algorithm <a name="algorithm" />
 Open the `algorithm_rgb.py` file in your favorite editor, if it isn't opened already.
@@ -183,6 +144,8 @@ even if the result.json file does not find errors)
 Now that you're created your algorithm, there's a few more things to take care of:
 
 1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
-2. Update the README.md file, filling out the sections with information on your algorithm; others will want to know so they can use it!
+2. Update the blueprint.md file if you have additional changes to make to the README and then run
+```npx @appnest/readme generate --package codemeta.json```,
+filling out the sections with information on your algorithm; others will want to know so they can use it!
 3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
 
