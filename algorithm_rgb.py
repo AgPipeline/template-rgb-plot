@@ -5,8 +5,6 @@
 import json
 import numpy as np
 
-metadata = json.load(open("codemeta.json", 'r'))
-
 # Definitions
 # Please replace these definitions' values with the correct ones
 VERSION = '1.0'

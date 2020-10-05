@@ -1,13 +1,28 @@
-# [{{pkg.name}}]({{ pkg.url }})
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#pkgname-pkgurl-)
 
-## Description
-{{ pkg.algorithm_description }}
+# ➤ [Template-rgb-plot](https://github.com/AgPipeline/template-rgb-plot)
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#description)
+
+## ➤ Description
+Replace this text with a description of the algorithm
 
 ### Methods
 
-{{ pkg.methods }}
+* add algorithm_rgb.py methods here
+* _get_variables_header_fields
+* print_usage
+* check_arguments
+* check_configuration
+* run_test
+* process_files
 
-## Assumptions
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#assumptions)
+
+## ➤ Assumptions
 It is assumed that:
 
 * An image folder is located in the root of this directory that will provide images for the calculate()
@@ -18,10 +33,16 @@ computer
 
 * You are familiar with Github template repositories, or know how to use git
 
-## Sample Transformers
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#sample-transformers)
+
+## ➤ Sample Transformers
 * [transformer-rgb-indices](https://github.com/AgPipeline/transformer-rgb-indices)
 
-## Steps to take
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#steps-to-take)
+
+## ➤ Steps to take
 The following steps can be taken to develop your algorithm for inclusion into a processing pipeline.
 
 1. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
@@ -104,10 +125,11 @@ Breaking apart this command line, we have the following pieces:
 - `/mnt/images` mounts the sample plot images to the running docker container
 
 Output should be in the format of image name and calculated value for that image on a single line for each of the images in the images folder.
-Example output from the images in the [Google Drive](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
-is contained below for plot images folder, which is titled sample_plot_images: 
+Example output from the images in the [Google Drive folder](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view?usp=sharing) 
+is contained below for plot images folder, with the folder titled sample_plot_images: 
 
-```Filename,size of image channels -  (pixels),
+```
+Filename,size of image channels -  (pixels),
 /mnt/sample_plot_images/rgb_17_7_W.tif,7000
 /mnt/sample_plot_images/rgb_40_11_W.tif,7000
 /mnt/sample_plot_images/rgb_6_1_E.tif,7000
@@ -144,7 +166,7 @@ even if the result.json file does not find errors)
 Now that you're created your algorithm, there's a few more things to take care of:
 
 1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
-2. Update the blueprint.md file. If you have additional changes to make to the README and then run
+2. Update the blueprint.md file if you have additional changes to make to the README and then run
 ```npx @appnest/readme generate --package codemeta.json```,
 filling out the sections with information on your algorithm; others will want to know so they can use it!
 3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
