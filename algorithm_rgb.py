@@ -2,7 +2,6 @@
 """
 
 # Importing modules. Please add any additional import statements below
-import json
 import numpy as np
 
 # Definitions
