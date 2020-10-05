@@ -1,0 +1,20 @@
+{
+  "_project_name": "Name your Project",
+  "_url": "https://github.com/AgPipeline/template-rgb-plot",
+  "_version": "Replace this text with the algorithm version",
+  "_author(s)": ["Replace this text with the algorithm author(s), separated by commas"],
+  "_author_email(s)": ["Replace this text with the algorithm author email(s), separated by commas"],
+  "_contributors": ["Replace this text with the algorithm contributors, separated by commas"],
+  "_algorithm_name": "Replace this text with the name of the algorithm",
+  "_algorithm_description": "Replace this text with a description of the algorithm",
+  "_citation_author": "Replace this text with the citation author for publication",
+  "_citation_title": "Replace this text with the citation title for publication",
+  "_citation_year": "Replace this text with the citation year for publication",
+  "_variable_names": ["Replace this text with your variable names. Note that variable names cannot have comma's in them. Additionally, don't add any whitespace since it may cause name comparisons to fail."],
+  "_variable_units": ["Replace this text with your variable unit(s) and comma-separate values"],
+  "_variable_labels": ["Variable labels matching the order of variable names, also comma-separated"],
+  "_methods": ["add algorithm_rgb.py methods here", "_get_variables_header_fields",
+    "print_usage", "check_arguments", "check_configuration", "run_test", "process_files"],
+  "_checkLinks": true
+}
+

@@ -22,7 +22,7 @@ The following steps can be taken to clone this repo and generate a complete READ
 for your algorithm
 
 1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
-2. [Definitions](#definitions): Fill in and modify the metadata in the codemeta.json file
+2. [Definitions](#definitions): Fill in and modify the metadata in the cookiecutter.json file
 3. [Generate full README.md](#readme): Run the command `npm install @appnest/readme -D` to install a module that can generate the final README
    and follow the steps below
 
@@ -34,7 +34,7 @@ You will be led through the steps necessary to create a clone in a location of y
 If you are not on GitHub, you will need to setup your `git` environment and clone the repository.
 
 ### Fill in your definitions <a name="definitions" />
-To fill in the needed definitions, first open the `codemeta.json` file in your favorite editor.
+To fill in the needed definitions, first open the `cookiecutter.json` file in your favorite editor.
 
 If you are modifying your existing code, you should consider updating the version number definition: `version`.
 It's assumed that [Semantic Version numbers](https://semver.org/) will be used, but any methodology can be used.
@@ -66,5 +66,5 @@ Be sure to save your changes.
 
 After you perform this step, a second README.md file should be generated that contains detailed information about how to generate, test, and publish the algorithm. 
 Following the README.md generation instructions from [this GitHub repo](https://github.com/andreasbm/readme#usage), first install @appnest/readme if you have not done
-so already using the command `npm install @appnest/readme`. Next run the command ```npx @appnest/readme generate --package codemeta.json``` in order to generate a 
-complete README.md file
+so already using the command `npm install @appnest/readme`. Next run the command ```npx @appnest/readme generate --output "{{ cookiecutter._project_name }}/README.md" --package cookiecutter.json```
+in order to generate a complete README.md file

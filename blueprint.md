@@ -1,11 +1,20 @@
-# [{{pkg.name}}]({{ pkg.url }})
+# [{{pkg._project_name}}]({{ pkg._url }})
+
+## Version 
+{{ pkg._version }}
+
+## Author(s)
+{{ pkg._author(s) }}
+
+#### Author Email(s)
+{{ pkg._author_email(s) }}
 
 ## Description
-{{ pkg.algorithm_description }}
+{{ pkg._algorithm_description }}
 
 ### Methods
 
-{{ pkg.methods }}
+{{ pkg._methods }}
 
 ## Assumptions
 It is assumed that:
@@ -30,7 +39,8 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 4. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
 5. [Testing Your docker image](#test_docker): OPTIONAL
 6. [Testing Image Production](#production): OPTIONAL
-7. [Finishing](#finishing): Finish up your development efforts
+7. [Generating Your Repository](#generate_repository): Generate your repository
+8. [Finishing](#finishing): Finish up your development efforts
 
 
 ### Add your algorithm <a name="algorithm" />
@@ -140,12 +150,25 @@ Once the image files have been processed, the resulting CSV file(s) will be loca
 The result.json file should tell you what errors were found in the checks from testing.py (make sure to check the output in the CSV file(s) 
 even if the result.json file does not find errors)
 
-### Finishing up <a name="finishing" />
+#### Generating your repository <a name=generate_repository />
+In order to generate your own repository from this one, [Cookiecutter](https://github.com/cookiecutter/cookiecutter/blob/master/README.md)
+will be used.
+
+Change your directory to be one directory above "template-rgb-plot" using `cd..`. Run the following command to generate
+your repository
+
+```cookiecutter template-rgb-plot```
+
+This will create a folder with the name {{ cookiecutter._project_name }} in the directory you are now in.
+
+### Finishing Algorithm Development <a name="finishing" />
 Now that you're created your algorithm, there's a few more things to take care of:
 
 1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
-2. Update the blueprint.md file. If you have additional changes to make to the README and then run
-```npx @appnest/readme generate --package codemeta.json```,
+2. Update the blueprint.md file if there are extra changes you need to make. Then run
+```npx @appnest/readme generate --output "{{ cookiecutter._project_name }}/README.md" --package cookiecutter.json```,
 filling out the sections with information on your algorithm; others will want to know so they can use it!
-3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
 
+Make sure to generate your repository again if needed using ```cookiecutter template-rgb-plot```!
+
+4. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
