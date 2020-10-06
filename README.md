@@ -66,10 +66,10 @@ Be sure to save your changes.
 
 After you perform this step, a second README.md file should be generated that contains detailed information about how to generate, test, and publish the algorithm. 
 Following the README.md generation instructions from [this GitHub repo](https://github.com/andreasbm/readme#usage), first install @appnest/readme if you have not done
-so already using the command `npm install @appnest/readme`. Next run the command ```npx @appnest/readme generate --output "{{ cookiecutter._project_name }}/README.md" --package cookiecutter.json```
+so already using the command `npm install @appnest/readme`. Next run the command ```npx @appnest/readme generate --output "{{cookiecutter._project_name}}/README.md" --package cookiecutter.json```
 in order to generate a complete README.md file
 
-The README will be located in the folder titled {{ cookiecutter._project_name }}
+The README will be located in the folder titled {{cookiecutter._project_name}}
 
 ### (OPTIONAL) Update blueprint.md <a name="update_blueprint" />
 If you would like your README.md file to look different than it currently does, you can change the markdown text

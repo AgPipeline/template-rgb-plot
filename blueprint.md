@@ -1,20 +1,20 @@
-# [{{pkg._project_name}}]({{ pkg._url }})
+# [{{pkg._project_name}}]({{pkg._url}})
 
 ## Version 
-{{ pkg._version }}
+{{pkg._version}}
 
 ## Author(s)
-{{ pkg._author(s) }}
+{{pkg._author(s)}}
 
 #### Author Email(s)
-{{ pkg._author_email(s) }}
+{{pkg._author_email(s)}}
 
 ## Description
-{{ pkg._algorithm_description }}
+{{pkg._algorithm_description}}
 
 ### Methods
 
-{{ pkg._methods }}
+{{pkg._methods}}
 
 ## Assumptions
 It is assumed that:
@@ -159,14 +159,14 @@ your repository
 
 ```cookiecutter template-rgb-plot```
 
-This will create a folder with the name that you chose for {{ cookiecutter._project_name }} in the directory you are now in.
+This will create a folder with the name that you chose for {{cookiecutter._project_name}} in the directory you are now in.
 
 ### Finishing Algorithm Development <a name="finishing" />
 Now that you're created your algorithm, there's a few more things to take care of:
 
 1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
 2. Update the blueprint.md file if there are extra changes you need to make. Then run
-```npx @appnest/readme generate --output "{{ cookiecutter._project_name }}/README.md" --package cookiecutter.json```,
+```npx @appnest/readme generate --output "{{cookiecutter._project_name}}/README.md" --package cookiecutter.json```,
 filling out the sections with information on your algorithm; others will want to know so they can use it!
 
 Make sure to generate your repository again if needed using ```cookiecutter template-rgb-plot```!
