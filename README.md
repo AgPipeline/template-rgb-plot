@@ -25,6 +25,7 @@ for your algorithm
 2. [Definitions](#definitions): Fill in and modify the metadata in the cookiecutter.json file
 3. [Generate full README.md](#readme): Run the command `npm install @appnest/readme -D` to install a module that can generate the final README
    and follow the steps below
+4. [Update blueprint.md](#update_blueprint): OPTIONAL
 
 ### Setup your repo <a name="setup"/>
 The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
@@ -61,10 +62,15 @@ Setting this value to `False` will suppress the generation of this file by defau
 
 Be sure to save your changes.
 
-
 ### Generate full README <a name="readme" />
 
 After you perform this step, a second README.md file should be generated that contains detailed information about how to generate, test, and publish the algorithm. 
 Following the README.md generation instructions from [this GitHub repo](https://github.com/andreasbm/readme#usage), first install @appnest/readme if you have not done
 so already using the command `npm install @appnest/readme`. Next run the command ```npx @appnest/readme generate --output "{{ cookiecutter._project_name }}/README.md" --package cookiecutter.json```
 in order to generate a complete README.md file
+
+The README will be located in the folder titled {{ cookiecutter._project_name }}
+
+### (OPTIONAL) Update blueprint.md <a name="update_blueprint" />
+If you would like your README.md file to look different than it currently does, you can change the markdown text
+in blueprint.md in order to reflect how you would like for it to look

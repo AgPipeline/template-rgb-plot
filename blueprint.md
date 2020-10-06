@@ -39,7 +39,7 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 4. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
 5. [Testing Your docker image](#test_docker): OPTIONAL
 6. [Testing Image Production](#production): OPTIONAL
-7. [Generating Your Repository](#generate_repository): Generate your repository
+7. [Generating Your Repository](#generate_repository): Generate rour repository using Cookiecutter
 8. [Finishing](#finishing): Finish up your development efforts
 
 
@@ -150,7 +150,7 @@ Once the image files have been processed, the resulting CSV file(s) will be loca
 The result.json file should tell you what errors were found in the checks from testing.py (make sure to check the output in the CSV file(s) 
 even if the result.json file does not find errors)
 
-#### Generating your repository <a name=generate_repository />
+### Generating your repository <a name=generate_repository />
 In order to generate your own repository from this one, [Cookiecutter](https://github.com/cookiecutter/cookiecutter/blob/master/README.md)
 will be used.
 
@@ -159,7 +159,7 @@ your repository
 
 ```cookiecutter template-rgb-plot```
 
-This will create a folder with the name {{ cookiecutter._project_name }} in the directory you are now in.
+This will create a folder with the name that you chose for {{ cookiecutter._project_name }} in the directory you are now in.
 
 ### Finishing Algorithm Development <a name="finishing" />
 Now that you're created your algorithm, there's a few more things to take care of:
@@ -171,4 +171,4 @@ filling out the sections with information on your algorithm; others will want to
 
 Make sure to generate your repository again if needed using ```cookiecutter template-rgb-plot```!
 
-4. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
+3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
