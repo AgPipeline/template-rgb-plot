@@ -1,4 +1,9 @@
-# [{{pkg._project_name}}]({{pkg._url}})
+# [ {{ pkg._project_name}} ]({{ pkg._url }})
+# name
+{{pkg._project_name}}
+
+# url
+{{pkg._url}}
 
 ## Version 
 {{pkg._version}}
@@ -13,16 +18,23 @@
 {{pkg._algorithm_description}}
 
 ### Methods
-
 {{pkg._methods}}
 
 ## Assumptions
 It is assumed that:
 
-* An image folder is located in the root of this directory that will provide images for the calculate()
-function to process. Sample plot images can be found [here](https://drive.google.com/file/d/1xWRU0YgK3Y9aUy5TdRxj14gmjLlozGxo/view)
+* An image folder is located in the root of this directory that will provide images for the calculate() function to process.
+ 
+* Sample plot images can be found [here](https://de.cyverse.org/dl/d/4108BB75-AAA3-48E1-BBD4-E10B06CADF54/sample_plot_images.zip)
+To retrieve these files, first create a folder titled images using the command `mkdir images`. Next, navigate to that
+folder using the command `cd images`. Now you are in the folder where your images will be located. To bring the image
+files into this folder, one option is to download them from the link and then move them manually into the folder. Another
+is to use the command `wget https://de.cyverse.org/dl/d/4108BB75-AAA3-48E1-BBD4-E10B06CADF54/sample_plot_images.zip`, which
+will download a zip file containing the image files. To uncompress the zip file, use the command `unzip sample_plot_images.zip`.
+Now you should have six .tif images located in the images directory. If you would like to remove the .zip file afterwards,
+use the command `rm sample_plot_images.zip`
 
-* You are generating a Docker image containing your algorithm and that you have Docker installed on your
+* You are generating a Docker image containing your algorithm and you have Docker installed on your
 computer
 
 * You are familiar with Github template repositories, or know how to use git
@@ -39,8 +51,8 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 4. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
 5. [Testing Your docker image](#test_docker): OPTIONAL
 6. [Testing Image Production](#production): OPTIONAL
-7. [Generating Your Repository](#generate_repository): Generate rour repository using Cookiecutter
-8. [Finishing](#finishing): Finish up your development efforts
+7. [Generating Your Local Repository](#generate_repository): OPTIONAL
+8. [Finishing Algorithm Development](#finishing): Finish up your development efforts
 
 
 ### Add your algorithm <a name="algorithm" />
@@ -150,25 +162,32 @@ Once the image files have been processed, the resulting CSV file(s) will be loca
 The result.json file should tell you what errors were found in the checks from testing.py (make sure to check the output in the CSV file(s) 
 even if the result.json file does not find errors)
 
-### Generating your repository <a name=generate_repository />
-In order to generate your own repository from this one, [Cookiecutter](https://github.com/cookiecutter/cookiecutter/blob/master/README.md)
-will be used.
+### (OPTIONAL) Generating your local repository <a name=generate_repository />
+In order to generate your own local repository from this one, [Cookiecutter](https://github.com/cookiecutter/cookiecutter/blob/master/README.md)
+will be used. Cookiecutter will use the cookiecutter.json file in order to create a personalized repository out of this template
 
 Change your directory to be one directory above "template-rgb-plot" using `cd..`. Run the following command to generate
 your repository
 
 ```cookiecutter template-rgb-plot```
 
-This will create a folder with the name that you chose for {{cookiecutter._project_name}} in the directory you are now in.
+This will create a folder with the name that you chose for {{cookiecutter._project_name}} in the directory you are now in/
+the parent directory of template-rgb-plot.
+
+Update the blueprint.md file if there are extra changes you need to make. Then run
+```npx @appnest/readme generate --output "{{cookiecutter._project_name}}/README.md" --package cookiecutter.json```,
+filling out the sections with information on your algorithm; others will want to know so they can use it!
 
 ### Finishing Algorithm Development <a name="finishing" />
 Now that you're created your algorithm, there's a few more things to take care of:
 
-1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
-2. Update the blueprint.md file if there are extra changes you need to make. Then run
-```npx @appnest/readme generate --output "{{cookiecutter._project_name}}/README.md" --package cookiecutter.json```,
-filling out the sections with information on your algorithm; others will want to know so they can use it!
+1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work! To do this, first
+make sure that your git remote is set to the right place. To do this, use `git remote -v`. If it is not, use the command
+`git remote set-url origin <repository url>` Next, using `git add .` will add all files and folders in the current directory. 
+Then do `git commit -m <message>` in order to add a message describing the changes you made. Use `git push` in order
+ to push those changes to GitHub.
 
-Make sure to generate your repository again if needed using ```cookiecutter template-rgb-plot```!
+2. Make sure to generate your repository again if needed using ```cookiecutter template-rgb-plot``` from the parent directory
+of template-rgb-plot!
 
 3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
