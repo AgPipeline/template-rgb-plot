@@ -14,7 +14,7 @@ DOCKERFILE_NAME = 'Dockerfile'
 
 # Template contents of the Docker build file
 DOCKERFILE_CONTENTS = [
-    'FROM agdrone/rgb-plot-base-image:1.4',
+    'FROM agdrone/rgb-plot-base-image:1.5',
     'LABEL maintainer="Someone <someone@example.com>"',
     '',
     'COPY requirements.txt packages.txt /home/extractor/',
@@ -43,7 +43,8 @@ DOCKERFILE_CONTENTS = [
     '',
     'USER extractor'
     '',
-    'COPY algorithm_rgb.py /home/extractor/'
+    'COPY algorithm_rgb.py /home/extractor/',
+    'COPY testing.py /home/extractor/'
 ]
 
 # Required variables in algorithm_rgb

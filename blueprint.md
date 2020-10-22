@@ -143,6 +143,8 @@ is contained below for plot images folder, which is titled sample_plot_images:
 Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
 ```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/images"```
+docker run --rm --mount "src=${PWD},target=/mnt,type=bind" default:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/sample_plot_images"
+
 
 Breaking apart this command line, we have the following pieces:
 - `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
