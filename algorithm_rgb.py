@@ -12,10 +12,10 @@ VERSION = '1.0'
 ALGORITHM_AUTHOR = 'Unknown'
 ALGORITHM_AUTHOR_EMAIL = ''
 ALGORITHM_CONTRIBUTORS = [""]
-
+hello = "hello"
 ALGORITHM_NAME = ''
 ALGORITHM_DESCRIPTION = ''
-hello = "hello"
+
 # Citation information for publication (more information in HOW_TO.md)
 CITATION_AUTHOR = ''
 CITATION_TITLE = ''
