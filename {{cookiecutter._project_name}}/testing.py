@@ -8,7 +8,7 @@ import sys
 import numpy as np
 import gdal
 
-import algorithm_rgb
+import temp
 
 
 def _get_variables_header_fields() -> str:
@@ -16,10 +16,10 @@ def _get_variables_header_fields() -> str:
     Return:
         Returns a string representing the variables' header fields
     """
-    variables = algorithm_rgb.VARIABLE_NAMES.split(',')
-    labels = algorithm_rgb.VARIABLE_LABELS.split(',')
+    variables = temp.VARIABLE_NAMES.split(',')
+    labels = temp.VARIABLE_LABELS.split(',')
     labels_len = len(labels)
-    units = algorithm_rgb.VARIABLE_UNITS.split(',')
+    units = temp.VARIABLE_UNITS.split(',')
     units_len = len(units)
 
     if labels_len != len(variables):
@@ -82,7 +82,7 @@ def check_arguments():
 def check_configuration():
     """Checks if the configuration is setup properly for testing
     """
-    if not hasattr(algorithm_rgb, 'VARIABLE_NAMES') or not algorithm_rgb.VARIABLE_NAMES:
+    if not hasattr(temp, 'VARIABLE_NAMES') or not temp.VARIABLE_NAMES:
         sys.stderr.write("Variable names configuration variable is not defined yet. Please define and try again")
         sys.stderr.write("    Update configuration.py and set VALUE_NAMES variable with your variable names")
         return False
@@ -105,7 +105,7 @@ def run_test(filename):
         if open_file:
             # Get the pixels and call the calculation
             pix = np.array(open_file.ReadAsArray())
-            calc_val = algorithm_rgb.calculate(np.rollaxis(pix, 0, 3))
+            calc_val = temp.calculate(np.rollaxis(pix, 0, 3))
 
             # Check for unsupported types
             if isinstance(calc_val, set):

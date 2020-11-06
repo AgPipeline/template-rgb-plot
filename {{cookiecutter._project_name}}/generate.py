@@ -84,7 +84,7 @@ def check_environment() -> bool:
         if not hasattr(algorithm_rgb, one_attr):
             bad_values.append(one_attr)
     if bad_values:
-        print("The following variables are not globally defined in algorithm_rgb.py: %s" % ', '.join(bad_values))
+        print("The following variables are not globally defined in temp.py: %s" % ', '.join(bad_values))
         print("Please add the variables and try again")
         return False
 
@@ -93,7 +93,7 @@ def check_environment() -> bool:
         if not getattr(algorithm_rgb, one_attr, None):
             bad_values.append(one_attr)
     if bad_values:
-        print("The following variables are empty in algorithm_rgb.py: %s" % ', '.join(bad_values))
+        print("The following variables are empty in temp.py: %s" % ', '.join(bad_values))
         print("Please assign values to the variables and try again")
         return False
 

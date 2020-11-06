@@ -1,3 +1,6 @@
+"""My nifty plot-level RGB algorithm
+"""
+
 # Imports into the python file. Please add any additional import statements that will be needed for your algorithm
 # below
 import numpy as np
@@ -52,4 +55,3 @@ def calculate(pxarray: np.ndarray):
     # RETURN: replace the following return with your calculated values.
     # Be sure to order them as defined in VARIABLE_NAMES above
     return channel_size
-
