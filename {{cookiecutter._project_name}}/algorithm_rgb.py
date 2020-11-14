@@ -41,7 +41,6 @@ WRITE_BETYDB_CSV = True
 # suppress the creation of a compatible file
 WRITE_GEOSTREAMS_CSV = True
 
-
 # Define your calculate() function
 def calculate(pxarray: np.ndarray):
     """Calculates one or more values from plot-level RGB data
@@ -51,7 +50,8 @@ def calculate(pxarray: np.ndarray):
         Returns one or more calculated values
     """
     # ALGORITHM: replace the following lines with your algorithm
-    channel_size = pxarray[:, :, 1].size * 5
+    channel_size = pxarray[:, :, 1].size*5
+    
     # RETURN: replace the following return with your calculated values.
     # Be sure to order them as defined in VARIABLE_NAMES above
     return channel_size
