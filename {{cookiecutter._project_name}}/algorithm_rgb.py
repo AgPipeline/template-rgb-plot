@@ -51,7 +51,7 @@ def calculate(pxarray: np.ndarray):
     """
     # ALGORITHM: replace the following lines with your algorithm
     channel_size = pxarray[:, :, 1].size*5
-    
+
     # RETURN: replace the following return with your calculated values.
     # Be sure to order them as defined in VARIABLE_NAMES above
     return channel_size
