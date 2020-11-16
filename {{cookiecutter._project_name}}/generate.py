@@ -43,8 +43,7 @@ DOCKERFILE_CONTENTS = [
     '',
     'USER extractor'
     '',
-    'COPY algorithm_rgb.py /home/extractor/',
-    'COPY testing.py /home/extractor/'
+    'COPY algorithm_rgb.py /home/extractor/'
 ]
 
 # Required variables in algorithm_rgb
