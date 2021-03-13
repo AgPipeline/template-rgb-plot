@@ -28,31 +28,36 @@ computer
 The following steps can be taken to clone this repo and generate a complete README.md
 for your algorithm
 
-1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
-2. [Definitions](#definitions): Fill in and modify the metadata in the cookiecutter.json file
-3. [Generate full README.md](#readme): Run the command `npm install @appnest/readme -D` to install a module that can generate the final README
+1. Install [cookiecutter](https://cookiecutter.readthedocs.io/en/1.7.2/first_steps.html#learn-the-basics-of-cookiecutter-by-creating-a-cookiecutter) if you haven't already. The following command can be used to install ```pip install cookiecutter```
+2. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
+3. [Definitions](#definitions): Fill in and modify the metadata in the cookiecutter.json file
+4. [Run cookiecutter](#run_cc): Run cookiecutter to generate your code
+5. [Create transformer](#transformer): edit the created files to implement your algorithm   
+4. [Generate full README.md](#readme): Run the command `npm install @appnest/readme -D` to install a module that can generate the final README
    and follow the steps below
-4. [Update blueprint.md](#update_blueprint): OPTIONAL
+5. [Update blueprint.md](#update_blueprint): OPTIONAL
 
 ### Setup your repo <a name="setup"/>
 The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
-In GitHub this is easy, browse to this [repository](https://github.com/AgPipeline/template-rgb-plot) and you can do one of
-the following:
+In GitHub this is easy, browse to this [repository](https://github.com/AgPipeline/template-rgb-plot) and you can do one of the following:
 
 1. click the `Use this template` button.
 You will be led through the steps necessary to create a clone in a location of your choosing.
 
-2. If you are not on GitHub, you will need to setup your `git` environment and clone the repository. You can use the command
-`git clone https://github.com/AgPipeline/template-rgb-plot.git`, which will create a repository called template-rgb-plot
-in the current directory. Navigate to and open this folder
+2. If you are not on GitHub, you will need to setup your `git` environment and clone the repository.
+You can use the command `git clone https://github.com/AgPipeline/template-rgb-plot.git`, which will create a repository called template-rgb-plot in the current directory.
 
 ### Fill in your definitions <a name="definitions" />
 To fill in the needed definitions, first open the `cookiecutter.json` file in your favorite text editor.
 
 The fields in the cookiecutter.json file will be used to populate and personalize your readme once it is generated.
 
+The `_project_name` variable will be used as the folder name when running cookie cutter to generate your code.
+
 If you are modifying existing code, you should consider updating the version number definition: `version`.
 It's assumed that [Semantic Version numbers](https://semver.org/) will be used, but any methodology can be used.
+
+Editing the following definitions is optional as they are used to fill in the `blueprint.md` file.
 
 Fill in the algorithm definitions with the creator(s) of the algorithm: `author(s)`, `author_email(s)`, `algorithm_name`, and `algorithm_description`.
 It's best if only one algorithm name is used, but call it what you want.
@@ -67,7 +72,20 @@ Enter each variable name for each returned value, in the order they are returned
 Be sure to enter them accurately since some systems may expect exact matches.
 It is considered a runtime error to have a mismatch between the number of variables names and the number of returned values.
 
-Now open algorithm_rgb.py
+### Run cookiecutter <a name="run_cc"/>
+Change to a folder where you'd like the transformer to be generated.
+
+Run the cookiecutter command to generate the transformer code specifying the path to the folder containing the template you just created.
+```bash
+# Change the path to the folder containing cookiecutter.json  
+cookiecutter /path/to/folder
+```
+
+This will create a folder named after the project name and populate it with files.
+
+### Configure your transformer <a name="transformer">
+
+Now open algorithm_rgb.py and fill in the variables at the start of the file, and add your algorithm to calculate() function.
 
 A CSV file suitable for ingestion to [BETYdb](https://www.betydb.org/) is generated depending upon the value of the `WRITE_BETYDB_CSV` variable.
 Setting this value to `False` will suppress the generation of this file by default.
@@ -89,14 +107,12 @@ needed to run the [readme generator](https://github.com/andreasbm/readme) Next r
 in order to generate a complete README.md file. 
 
 This will use the fields contained in cookiecutter.json to populate fields contained in double brackets {{}}. 
-For instance the above {{pkg._version}} will look in the cookiecutter.json file for a field called 
-_version and then use that as the version number in the created README.md file.
+For instance the above {{pkg._version}} will look in the cookiecutter.json file for a field called _version and then use that as the version number in the created README.md file.
  
 After performing the necessary [installations](https://github.com/andreasbm/readme#-installation)
  
 The README will be located in the folder titled {{cookiecutter._project_name}}
 
 ### (OPTIONAL) Update blueprint.md <a name="update_blueprint" />
-If you would like your README.md file to look different than it currently does, you can change the markdown text
-in blueprint.md in order to reflect how you would like for it to look. Then you should [Generate full README.md](#readme)
-again to update the README
+If you would like your README.md file to look different than it currently does, you can change the markdown text in blueprint.md in order to reflect how you would like for it to look.
+Then you should [Generate full README.md](#readme) again to update the README
