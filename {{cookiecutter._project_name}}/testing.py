@@ -109,7 +109,8 @@ def run_test(filename):
 
             # Check for unsupported types
             if isinstance(calc_val, set):
-                raise RuntimeError("A 'set' type of data was returned and isn't supported.  Please use a list or a tuple instead")
+                raise RuntimeError("A 'set' type of data was returned and isn't supported.  Please use a list or a "
+                                   "tuple instead")
 
             # Perform any type conversions to a printable string
             if isinstance(calc_val, str):

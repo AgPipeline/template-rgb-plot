@@ -1,62 +1,59 @@
-# How To Use This Template
-This document describes how to use this transformer template for your custom algorithm processing plot-level RGB data.
+# [ {{ pkg._project_name}} ]({{ pkg._url }})
+# name
+{{pkg._project_name}}
 
-## Additional Information
-Additional technical information can be found on our [GitHub IO page](https://agpipeline.github.io/transformers/template_rgb_plot) for this repository.
+# url
+{{pkg._url}}
 
-If you are not familiar with working with an image's alpha channel, there is information and examples on [how to do that](https://agpipeline.github.io/transformers/template_rgb_plot#alpha_channel) on the technical page.
+## Version 
+{{pkg._version}}
+
+## Author(s)
+{{pkg._author(s)}}
+
+#### Author Email(s)
+{{pkg._author_email(s)}}
+
+## Description
+{{pkg._algorithm_description}}
+
+### Methods
+{{pkg._methods}}
 
 ## Assumptions
 It is assumed that:
-- you are generating a Docker image containing your algorithm and that you have Docker installed on your computer
-- are familiar with GitHub template repositories, or know how to use `git`
+
+* An image folder is located in the root of this directory that will provide images for the calculate() function to process.
+ 
+* Sample plot images can be found [here](https://de.cyverse.org/dl/d/4108BB75-AAA3-48E1-BBD4-E10B06CADF54/sample_plot_images.zip)
+To retrieve these files, first create a folder titled images using the command `mkdir images`. Next, navigate to that
+folder using the command `cd images`. Now you are in the folder where your images will be located. To bring the image
+files into this folder, one option is to download them from the link and then move them manually into the folder. Another
+is to use the command `wget https://de.cyverse.org/dl/d/4108BB75-AAA3-48E1-BBD4-E10B06CADF54/sample_plot_images.zip`, which
+will download a zip file containing the image files. To uncompress the zip file, use the command `unzip sample_plot_images.zip`.
+Now you should have six .tif images located in the images directory. If you would like to remove the .zip file afterwards,
+use the command `rm sample_plot_images.zip`
+
+* You are generating a Docker image containing your algorithm and you have Docker installed on your
+computer
+
+* You are familiar with Github template repositories, or know how to use git
+
+## Sample Transformers
+* [transformer-rgb-indices](https://github.com/AgPipeline/transformer-rgb-indices)
 
 ## Steps to take
 The following steps can be taken to develop your algorithm for inclusion into a processing pipeline.
 
-1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
-2. [Definitions](#definitions): Fill in and modify the definitions in the algorithm_rgb.py file
-3. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
-4. [Generate](#generate): Run `generate.py` to create a Dockerfile
-5. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
-6. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
-7. [Testing Your docker image](#test_docker): OPTIONAL
-8. [Testing Image Production](#production): OPTIONAL
-9. [Finishing](#finishing): Finish up your development efforts
+1. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
+2. [Generate](#generate): Run `generate.py` to create a Dockerfile
+3. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
+4. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
+5. [Testing Your docker image](#test_docker): OPTIONAL
+6. [Testing Image Production](#production): OPTIONAL
+7. [Generating Your Local Repository](#generate_repository): OPTIONAL
+8. [Finishing Algorithm Development](#finishing): Finish up your development efforts
 
-### Setup your repo <a name="setup"/>
-The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
-In GitHub this is easy, browse to this [repository](https://github.com/AgPipeline/template-rgb-plot) and click the `Use this template` button.
-You will be led through the steps necessary to create a clone in a location of your choosing.
-
-If you are not on GitHub, you will need to setup your `git` environment and clone the repository.
-
-### Fill in your definitions <a name="definitions" />
-To fill in the needed definitions, first open the `algorithm_rgb.py` file in your favorite editor.
-
-If you are modifying your existing code, you should consider updating the version number definition: `VERSION`.
-It's assumed that [Semantic Version numbers](https://semver.org/) will be used, but any methodology can be used.
-
-Fill in the algorithm definitions with the creator(s) of the algorithm: `ALGORITHM_AUTHOR`, `ALGORITHM_AUTHOR_EMAIL`, `ALGORITHM_NAME`, and `ALGORITHM_DESCRIPTION`.
-Multiple names for `ALGORITHM_AUTHOR` and multiple emails for `ALGORITHM_AUTHOR_EMAIL` are supported.
-It's best if only one algorithm name is used, but call it what you want.
-The safest algorithm naming convention to use is to convert any white-space or other characters to periods (.) which allows different systems to more-easily change the name, if needed.
-
-Next fill in the citation information that will be used in the generated CSV file: `CITATION_AUTHOR`, `CITATION_TITLE`, and `CITATION_YEAR`.
-Be sure to enter the citation information accurately since some systems may expect exact matches.
-
-The names of the variables are used to determine the number of returned values your algorithm produces: `VARIABLE_NAMES`.
-Enter each variable name for each returned value, in the order they are returned, separated by a comma.
-Be sure to enter them accurately since some systems may expect exact matches.
-It is considered an error to have a mismatch between the number of variables names and the number of returned values.
-
-A CSV file suitable for ingestion to [BETYdb](https://www.betydb.org/) is generated depending upon the value of the `WRITE_BETYDB_CSV` variable.
-Setting this value to `False` will suppress the generation of this file by default.
-
-A CSV file suitable for ingestion to [TERRA REF Geostreams](https://docs.terraref.org/user-manual/data-products/environmental-conditions) is generated depending upon the value of the `WRITE_GEOSTREAMS_CSV` variable.
-Setting this value to `False` will suppress the generation of this file by default.
-
-Be sure to save your changes.
 
 ### Add your algorithm <a name="algorithm" />
 Open the `algorithm_rgb.py` file in your favorite editor, if it isn't opened already.
@@ -150,7 +147,9 @@ Example output from the images in the [sample image set]() is shown below for th
 
 Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
-```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/test_images"```
+```bash
+docker run --rm -v "${PWD}:/mnt,type=bind" default:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/sample_plot_images"
+```
 
 Breaking apart this command line, we have the following pieces:
 - `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
@@ -170,10 +169,32 @@ Once the image files have been processed, the resulting CSV file(s) will be loca
 The result.json file should tell you what errors were found in the checks from testing.py (make sure to check the output in the CSV file(s) 
 even if the result.json file does not find errors)
 
-### Finishing up <a name="finishing" />
+### (OPTIONAL) Generating your local repository <a name=generate_repository />
+In order to generate your own local repository from this one, [Cookiecutter](https://github.com/cookiecutter/cookiecutter/blob/master/README.md)
+will be used. Cookiecutter will use the cookiecutter.json file in order to create a personalized repository out of this template
+
+Change your directory to be one directory above "template-rgb-plot" using `cd..`. Run the following command to generate
+your repository
+
+```cookiecutter template-rgb-plot```
+
+This will create a folder with the name that you chose for {{cookiecutter._project_name}} in the directory you are now in/
+the parent directory of template-rgb-plot.
+
+Update the blueprint.md file if there are extra changes you need to make. Then run
+```npx @appnest/readme generate --output "{{cookiecutter._project_name}}/README.md" --package cookiecutter.json```,
+filling out the sections with information on your algorithm; others will want to know so they can use it!
+
+### Finishing Algorithm Development <a name="finishing" />
 Now that you're created your algorithm, there's a few more things to take care of:
 
-1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
-2. Update the README.md file, filling out the sections with information on your algorithm; others will want to know so they can use it!
-3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
+1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work! To do this, first
+make sure that your git remote is set to the right place. To do this, use `git remote -v`. If it is not, use the command
+`git remote set-url origin <repository url>` Next, using `git add .` will add all files and folders in the current directory. 
+Then do `git commit -m <message>` in order to add a message describing the changes you made. Use `git push` in order
+ to push those changes to GitHub.
 
+2. Make sure to generate your repository again if needed using ```cookiecutter template-rgb-plot``` from the parent directory
+of template-rgb-plot!
+
+3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
