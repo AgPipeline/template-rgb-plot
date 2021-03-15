@@ -33,13 +33,14 @@ VARIABLE_NAMES = 'size of image channels'
 VARIABLE_UNITS = 'pixels'
 VARIABLE_LABELS = ''
 
-# Optional override for the generation of a BETYdb compatible csv file. Set to False to suppress the creation of a
-# compatible file
-WRITE_BETYDB_CSV = True
+# Optional override for the generation of a BETYdb compatible csv file.
+# Set to True to create a compatible file by default
+WRITE_BETYDB_CSV = False
 
-# Optional override for the generation of a TERRA REF Geostreams compatible csv file. Set the variable to False to
-# suppress the creation of a compatible file
-WRITE_GEOSTREAMS_CSV = True
+# Optional override for the generation of a TERRA REF Geostreams compatible csv file.
+# Set the variable to True to create a compatible file by default
+WRITE_GEOSTREAMS_CSV = False
+
 
 # Define your calculate() function
 def calculate(pxarray: np.ndarray):
