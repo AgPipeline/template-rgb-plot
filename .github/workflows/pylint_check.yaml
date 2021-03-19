@@ -74,6 +74,8 @@ jobs:
         run: ls -la
       - name: Files to be linted
         run: cat action_pylint_files.txt
+      - name: Installed modules
+        run: python3 -m pip list
       - name: Running pylint
         run: cat action_pylint_files.txt | xargs python3 -m pylint --rcfile ./pylint.rc
 
