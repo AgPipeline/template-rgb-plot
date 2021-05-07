@@ -1,7 +1,7 @@
 # Template-rgb-plot
 
 ## Description
-This is an rgb image-based template that can be used to test plot-level algorithms for the Python programming language.
+This is an rgb image-based template that can be used to test plot-level algorithms in Python and Docker.
 
 ## Assumptions <a name="assumptions" />
 It is assumed that:
@@ -17,7 +17,7 @@ To uncompress the zip file, use the command `unzip sample_plot_images.zip`.
 Now you should have six .tif images located in the images directory.
 If you would like to remove the .zip file afterwards, use the command `rm sample_plot_images.zip`
 
-* You are generating a Docker image containing your algorithm and that you have Docker installed on your
+* You are generating a Docker image containing your algorithm and that you have [Docker](https://www.docker.com) installed on your
 computer
 
 * You are familiar with Github template repositories, or know how to use git
