@@ -21,7 +21,7 @@ ALGORITHM_DESCRIPTION = 'add description here'
 # the citation year
 CITATION_AUTHOR = 'add citation author'
 CITATION_TITLE = 'add citation title'
-CITATION_YEAR = '2020'
+CITATION_YEAR = '2021'
 
 # Include the name(s) of the variable(s) used in the algorithm, separated by commas. Note that variable names cannot
 # have comma's in them: use a different separator instead. Also, all white space is kept intact; don't add any extra
@@ -33,14 +33,13 @@ VARIABLE_NAMES = 'size of image channels'
 VARIABLE_UNITS = 'pixels'
 VARIABLE_LABELS = ''
 
-# Optional override for the generation of a BETYdb compatible csv file.
-# Set to True to create a compatible file by default
-WRITE_BETYDB_CSV = False
+# Optional override for the generation of a BETYdb compatible csv file. Set to False to suppress the creation of a
+# compatible file
+WRITE_BETYDB_CSV = True
 
-# Optional override for the generation of a TERRA REF Geostreams compatible csv file.
-# Set the variable to True to create a compatible file by default
-WRITE_GEOSTREAMS_CSV = False
-
+# Optional override for the generation of a TERRA REF Geostreams compatible csv file. Set the variable to False to
+# suppress the creation of a compatible file
+WRITE_GEOSTREAMS_CSV = True
 
 # Define your calculate() function
 def calculate(pxarray: np.ndarray):
