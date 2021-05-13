@@ -1,8 +1,8 @@
 """My nifty plot-level RGB algorithm
 """
 
-# Imports into the python file. Please add any additional import statements that will be needed for your algorithm
-# below
+# Imports into the python file for running the algorithm. Please add any additional import statements that will be
+# needed for your algorithm in the block below:
 import numpy as np
 
 # Define the version number of your algorithm. Consider using [Semantic Versioning](https://semver.org/)
@@ -21,7 +21,7 @@ ALGORITHM_DESCRIPTION = 'add description here'
 # the citation year
 CITATION_AUTHOR = 'add citation author'
 CITATION_TITLE = 'add citation title'
-CITATION_YEAR = '2021'
+CITATION_YEAR = '2020'
 
 # Include the name(s) of the variable(s) used in the algorithm, separated by commas. Note that variable names cannot
 # have comma's in them: use a different separator instead. Also, all white space is kept intact; don't add any extra
