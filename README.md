@@ -41,7 +41,6 @@ The following steps can be taken to develop your algorithm for inclusion into a 
 8. [Running Your Docker Image](#run_docker): Run the created Docker image
 9. [Finishing Algorithm Development](#finishing): Finish up your development efforts
 
-
 ### Setup <a name="setup"/>
 The first thing to do is to create a copy of this repository that has a meaningful name and that you are able to modify.
 In GitHub this is easy, browse to the [template-rgb-plot repository](https://github.com/AgPipeline/template-rgb-plot) and click the `Use this template` button.
