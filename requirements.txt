@@ -1,3 +1,4 @@
-numpy
-pandas
-pillow
+numpy==1.20.2
+pandas==1.2.4
+pillow==8.2.0
+urllib3==1.26.4
