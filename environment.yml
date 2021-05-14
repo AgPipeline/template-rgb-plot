@@ -93,7 +93,7 @@ dependencies:
   - tk
   - tzcode
   - tzdata
-  - urllib3==1.26.4
+  - urllib3
   - wheel
   - xerces-c
   - xz
