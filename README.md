@@ -1,6 +1,6 @@
 # Template-rgb-plot
 
-### launch with myBinder
+### Launch with myBinder
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AgPipeline/template-rgb-plot/earthcube)
 
 ## Description
