@@ -1,5 +1,8 @@
 # Template-rgb-plot
 
+### launch with myBinder
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AgPipeline/template-rgb-plot/earthcube)
+
 ## Description
 This is an rgb image-based template that can be used to test plot-level algorithms in Python and Docker.
 
