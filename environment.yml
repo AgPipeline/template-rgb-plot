@@ -19,7 +19,7 @@ dependencies:
   - fontconfig
   - freetype
   - freexl
-  - gdal
+  - gdal==3.2.2
   - geos
   - geotiff
   - gettext
@@ -64,14 +64,14 @@ dependencies:
   - mkl_fft
   - mkl_random
   - ncurses
-  - numpy
+  - numpy==1.20.2
   - numpy-base
   - olefile
   - openjpeg
   - openssl
-  - pandas
+  - pandas==1.2.4
   - pcre
-  - pillow
+  - pillow==8.2.0
   - pip
   - pixman
   - poppler
@@ -93,7 +93,7 @@ dependencies:
   - tk
   - tzcode
   - tzdata
-  - urllib3
+  - urllib3==1.26.4
   - wheel
   - xerces-c
   - xz
