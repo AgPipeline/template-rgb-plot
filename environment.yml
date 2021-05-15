@@ -64,14 +64,14 @@ dependencies:
   - mkl_fft
   - mkl_random
   - ncurses
-  - numpy
+  - numpy==1.20.2
   - numpy-base
   - olefile
   - openjpeg
   - openssl
-  - pandas
+  - pandas==1.2.4
   - pcre
-  - pillow
+  - pillow==8.2.0
   - pip
   - pixman
   - poppler
