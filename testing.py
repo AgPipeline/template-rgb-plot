@@ -6,7 +6,7 @@
 import os
 import sys
 import numpy as np
-from osgeo import gdal
+from PIL import Image
 
 import algorithm_rgb
 
@@ -101,7 +101,7 @@ def run_test(filename):
         the file is not an image file.
     """
     try:
-        open_file = gdal.Open(filename)
+        open_file = Image.open(filename)
         if open_file:
             # Get the pixels and call the calculation
             pix = np.array(open_file.ReadAsArray())

@@ -32,6 +32,8 @@ You will be led through the steps necessary to create a clone in a location of y
 If you are not on GitHub, you will need to setup your `git` environment and clone the repository.
 
 ### Fill in your definitions <a name="definitions" />
+Refer to the transformer-rgb-indices repo [algorithm_rgb.py](https://github.com/AgPipeline/transformer-rgb-indices/blob/b6475323c03c11445486109ac958f43da1d1b489/algorithm_rgb.py#L8) file for an example on filling in your definitions.
+
 To fill in the needed definitions, first open the `algorithm_rgb.py` file in your favorite editor.
 
 If you are modifying your existing code, you should consider updating the version number definition: `VERSION`.
@@ -76,13 +78,21 @@ Be sure to save your changes.
 ### Generate the Docker build command file <a name="generate" />
 It's time to generate the Dockerfile that's used to build Docker images.
 
-Docker images can be used as part of a workflow
+Docker images can be used as part of a workflow and this step can be used to create that image for your algorithm.
 
 To assist in this effort we've provided a script named `generate.py` to produce a file containing the Docker commands needed.
 Running this script will not only produce a Docker command file, named `Dockerfile` but also two other files that can be used to install additional dependencies your algorithm needs.
 These two other files are named `requirements.txt` for additional Python modules and `packages.txt` for other dependencies.
 
-To generate these files, just run `generate.py`.
+To generate these files, just run
+```bash
+./generate.py
+```
+
+If you receive  a permissions error or the script can't be executed on your machine, you can run it with Python by using the following command:
+```bash
+python3 generate.py
+```
 
 If your algorithm has additional python module dependencies, edit `requirements.txt` and add the names of the modules.
 The listed modules will then be installed as part of the Docker build process.
@@ -94,18 +104,34 @@ The packages listed will be installed using `apt-get` as part of the Docker buil
 A testing script named `testing.py` is provided for testing your algorithm.
 It checks whether the configuration is correct for testing the files by making sure that the arguments in algorithm_rgb as well as the image files are in the correct format
 
-The testing script requires `numpy` and `gdal` to be installed on the testing system.
+The testing script requires `numpy` and `PIL` to be installed on the testing system.
+The following command can be used to install these libraries:
+```bash
+python3 -m pip install numpy Pillow
+```
 
-If your files reside in `/user/myself/test_images` the command to test could be the following:
-```./testing.py /user/myself/test_images```
+If your testing files reside in a subfolder named `test_images`, the following command can be used to run the tests:
+```bash
+./testing.py ${PWD}/test_images
+```
+
+The following command can be used if you receive a permissions error when trying to run `testing.py`:
+```bash
+python3 testing.py ${PWD}/test_images
+```
 
 What isn't provided in the template repository are the plot-level RGB images to test against.
 It's expected that you will either provide the images or use a standard set that can be downloaded.
 The following commands can be used to retrieve and extract the test images:
 ```bash
+# Create the subfolder to hold the images
 mkdir test_images
+# Download the archive containing the images
 curl -X GET https://de.cyverse.org/dl/d/4108BB75-AAA3-48E1-BBD4-E10B06CADF54/sample_plot_images.zip -o test_images/sample_plot_images.zip
+# Extract the images into the subfolder
 unzip test_images/sample_plot_images.zip -d test_images/
+# Remove the archive
+rm test_images/sample_plot_images.zip
 ```
 
 The testing script expects to have either a list of source plot image files, or a folder name, or both specified on the command line.
@@ -123,16 +149,16 @@ Please note that there may be naming requirements for pushing images to a reposi
 
 In order to test your docker image, you can use the command:
 
-```docker run --rm -it -v `pwd`:/mnt --entrypoint /mnt/testing.py my_algorithm:latest /mnt/test_images```
+```docker run --rm -it -v ${PWD}:/mnt --entrypoint /mnt/testing.py my_algorithm:latest /mnt/test_images```
 
 Breaking apart this command line, we have the following pieces:
 - `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
 - `--rm` tells Docker to remove the container (an image instance) when it's completed
-- `it` allows you to have a stdin stream and terminal driver added to the docker container allowing an interactive session
-- `-v "pwd":/mnt` bind mounts a volume to the docker container so that the current working directory (given by pwd) will be copied into the volume
-- `--entrypoint /mnt/testing.py` defines the Docker container that will be run, with testing.py mounted to that container 
-- `my_algorithm:latest` is the image to run (the running image is known as a *container*)
-- `/mnt/test_images` mounts the sample plot images to the running docker container
+- `-it` allows you to have a stdin stream and terminal driver added to the docker container allowing an interactive session
+- `-v ${PWD}:/mnt` bind mounts a volume to the docker container so that the current working directory (given by **${PWD}**) will be available
+- `--entrypoint /mnt/testing.py` overrides the default entrypoint of the Docker image tp run the testing script
+- `my_algorithm:latest` is the Docker image to run (the running image is known as a *container*)
+- `/mnt/test_images` specifies the location where the script finds the images to test with
 
 Output should be in the format of image name and calculated value for that image on a single line for each of the images in the images folder.
 Example output from the images in the [sample image set]() is shown below for the plot sample images folder, which is titled test_images: 
@@ -150,22 +176,23 @@ Example output from the images in the [sample image set]() is shown below for th
 
 Using the same image setup as used when testing your algorithm, a sample command line to run the image could be:
 
-```docker run --rm --mount "src=/user/myself,target=/mnt,type=bind" my_algorithm:latest --working_space "/mnt" --metadata "mnt/experiment.yml" "/mnt/test_images"```
+```bash
+docker run --rm -v "${PWD}:/mnt" my_algorithm:latest --working_space "/mnt" "/mnt/test_images"
+```
 
 Breaking apart this command line, we have the following pieces:
 - `docker run` tells Docker to run an instance of the image (specified later in the command) (Refer to [docker run](https://docs.docker.com/engine/reference/run/) documentation)
 - `--rm` tells Docker to remove the container (an image instance) when it's completed
-- `--mount "src=/user/myself,target=/mnt,type=bind"` specifies the */user/myself* path is to be made available as */mnt* in the container
+- `-v "${PWD}:/mnt"` specifies the *${PWD}* path is to be made available as */mnt* in the container
 - `my_algorithm:latest` is the image to run (the running image is known as a *container*)
 - `--working_space "/mnt"` lets the software in the container know where its working disk space is located; files are created here
-- `--metadata "mnt/experiment.yml"` specifies that the metadata file experiment.yml will be made available to the container
 - `"/mnt/test_images"` specifies where the plot-level image files are located
 
-The `--mount` command line parameter is important since it allows the running container to access the local file system.
+The `-v` command line parameter is important since it allows the running container to access the local file system.
 The container can then load the images from the file system directly, without having to perform any copies.
 The parameters after the Docker image name are all relative to the target folder specified with this command line parameter.
 
-Once the image files have been processed, the resulting CSV file(s) will be located in the folder at `/user/myself` (in this example).
+Once the image files have been processed, the resulting CSV file(s) will be located in the current folder at `${PWD}` (in this example).
 
 The result.json file should tell you what errors were found in the checks from testing.py (make sure to check the output in the CSV file(s) 
 even if the result.json file does not find errors)
