@@ -1,30 +1,35 @@
 # How To Use This Template
+
 This document describes how to use this transformer template for your custom algorithm processing plot-level RGB data.
 
 ## Additional Information
+
 Additional technical information can be found on our [GitHub IO page](https://agpipeline.github.io/transformers/template_rgb_plot) for this repository.
 
 If you are not familiar with working with an image's alpha channel, there is information and examples on [how to do that](https://agpipeline.github.io/transformers/template_rgb_plot#alpha_channel) on the technical page.
 
 ## Assumptions
+
 It is assumed that:
 - you are generating a Docker image containing your algorithm and that you have Docker installed on your computer
 - are familiar with GitHub template repositories, or know how to use `git`
 
 ## Steps to take
+
 The following steps can be taken to develop your algorithm for inclusion into a processing pipeline.
 
 1. [Setup](#setup): Click the `Use this template` button in GitHub to make a copy of this repository (or run `git clone`)
 2. [Definitions](#definitions): Fill in and modify the definitions in the algorithm_rgb.py file
 3. [Algorithm](#algorithm): Replace the code in the `calculate` function with your algorithm
-4. [Generate](#generate): Run `generate.py` to create a Dockerfile
-5. [Test](#test): Run the `testing.py` script to run your algorithm and validate the results
+4. [Generate](#generate): Run `python3 generate.py` to create a Dockerfile
+5. [Test](#test): Run the `python3 testing.py` script to run your algorithm and validate the results
 6. [Docker](#build_docker): Create a Docker image for your algorithm and publish it
 7. [Testing Your docker image](#test_docker): OPTIONAL
 8. [Testing Image Production](#production): OPTIONAL
 9. [Finishing](#finishing): Finish up your development efforts
 
 ### Setup your repo <a name="setup"/>
+
 The first thing to do is to create a copy of this repository has a meaningful name and that you are able to modify.
 In GitHub this is easy, browse to this [repository](https://github.com/AgPipeline/template-rgb-plot) and click the `Use this template` button.
 You will be led through the steps necessary to create a clone in a location of your choosing.
@@ -32,6 +37,7 @@ You will be led through the steps necessary to create a clone in a location of y
 If you are not on GitHub, you will need to setup your `git` environment and clone the repository.
 
 ### Fill in your definitions <a name="definitions" />
+
 To fill in the needed definitions, first open the `algorithm_rgb.py` file in your favorite editor.
 
 If you are modifying your existing code, you should consider updating the version number definition: `VERSION`.
@@ -59,7 +65,8 @@ Setting this value to `False` will suppress the generation of this file by defau
 Be sure to save your changes.
 
 ### Add your algorithm <a name="algorithm" />
-Open the `algorithm_rgb.py` file in your favorite editor, if it isn't opened already.
+
+Open the [`algorithm_rgb.py`](algorithm_rgb.py) file in your favorite editor, if it isn't opened already.
 
 Scroll to the bottom of the file to the function named `calculate`.
 
@@ -74,6 +81,7 @@ Modify the rest of the file as necessary if there are additional import statemen
 Be sure to save your changes.
 
 ### Generate the Docker build command file <a name="generate" />
+
 It's time to generate the Dockerfile that's used to build Docker images.
 
 Docker images can be used as part of a workflow
@@ -82,7 +90,7 @@ To assist in this effort we've provided a script named `generate.py` to produce 
 Running this script will not only produce a Docker command file, named `Dockerfile` but also two other files that can be used to install additional dependencies your algorithm needs.
 These two other files are named `requirements.txt` for additional Python modules and `packages.txt` for other dependencies.
 
-To generate these files, just run `generate.py`.
+To generate these files, run `python3 generate.py`.
 
 If your algorithm has additional python module dependencies, edit `requirements.txt` and add the names of the modules.
 The listed modules will then be installed as part of the Docker build process.
@@ -91,13 +99,17 @@ If there are other dependencies needed by your algorithm, add them to the `packa
 The packages listed will be installed using `apt-get` as part of the Docker build process.
 
 ### Test your algorithm <a name="test"/>
+
 A testing script named `testing.py` is provided for testing your algorithm.
 It checks whether the configuration is correct for testing the files by making sure that the arguments in algorithm_rgb as well as the image files are in the correct format
 
 The testing script requires `numpy` and `gdal` to be installed on the testing system.
 
 If your files reside in `/user/myself/test_images` the command to test could be the following:
-```./testing.py /user/myself/test_images```
+
+```
+./testing.py /user/myself/test_images
+```
 
 What isn't provided in the template repository are the plot-level RGB images to test against.
 It's expected that you will either provide the images or use a standard set that can be downloaded.
@@ -111,9 +123,15 @@ unzip test_images/sample_plot_images.zip -d test_images/
 The testing script expects to have either a list of source plot image files, or a folder name, or both specified on the command line.
 
 ### Create the Docker image <a name="build_docker" />
+
 Now that you have generated your `Dockerfile` as described [above](#generate) and specified any Python modules and other packages needed by your algorithm, you are ready to create a Docker image of your algorithm.
 
-A sample Docker build command could be: ```docker build -t my_algorithm:latest ./```
+You can build the Docker image with the following command: 
+
+```
+docker build -t my_algorithm:latest ./
+```
+
 Please refer to the Docker documentation for additional information on building a docker image.
 
 Once the image is built, you can run it locally or push it to an image repository, such as [DockerHub](https://hub.docker.com/).
