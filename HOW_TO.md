@@ -108,7 +108,7 @@ The testing script requires `numpy` and `gdal` to be installed on the testing sy
 If your files reside in `/user/myself/test_images` the command to test could be the following:
 
 ```bash
-./testing.py /user/myself/test_images
+python3 testing.py /user/myself/test_images
 ```
 
 What isn't provided in the template repository are the plot-level RGB images to test against.
