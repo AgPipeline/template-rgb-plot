@@ -128,7 +128,7 @@ Now that you have generated your `Dockerfile` as described [above](#generate) an
 
 You can build the Docker image with the following command: 
 
-```
+``` bash
 docker build -t my_algorithm:latest ./
 ```
 
