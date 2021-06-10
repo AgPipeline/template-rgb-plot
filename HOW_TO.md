@@ -107,7 +107,7 @@ The testing script requires `numpy` and `gdal` to be installed on the testing sy
 
 If your files reside in `/user/myself/test_images` the command to test could be the following:
 
-```
+```bash
 ./testing.py /user/myself/test_images
 ```
 
@@ -194,4 +194,3 @@ Now that you're created your algorithm, there's a few more things to take care o
 1. Make sure you've checked in your changes into source control; you don't want to lose all that hard work!
 2. Update the README.md file, filling out the sections with information on your algorithm; others will want to know so they can use it!
 3. Submit any requests to our ticketing system on GitHub:  https://github.com/AgPipeline/computing-pipeline/issues/new/choose
-
