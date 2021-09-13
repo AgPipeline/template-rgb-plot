@@ -115,7 +115,8 @@ def generate_files() -> int:
     """
     try:
         for one_name in EMPTY_FILE_NAMES:
-            open(one_name, 'a').close()
+            # pylint: disable=consider-using-with
+            open(one_name, 'a', encoding='utf-8').close()
     except Exception as ex:
         print("Exception caught while attempting to create files: %s" % str(ex))
         print("Stopping file generation")
@@ -123,7 +124,7 @@ def generate_files() -> int:
 
     # Create the Dockerfile
     try:
-        with open(DOCKERFILE_NAME, "w") as out_file:
+        with open(DOCKERFILE_NAME, 'w', encoding='utf-8') as out_file:
             out_file.write('# automatically generated: %s\n' % datetime.datetime.now().isoformat())
             for line in DOCKERFILE_CONTENTS:
                 if line.startswith('LABEL maintainer='):
