@@ -14,11 +14,6 @@ DOCKERFILE_NAME = 'Dockerfile'
 
 # Template contents of the Docker build file
 DOCKERFILE_CONTENTS = [
-    'RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz && \\',
-    'tar xzvf docker-17.04.0-ce.tgz && \\',
-    'mv docker/docker /usr/local/bin && \\',
-    'rm -r docker docker-17.04.0-ce.tgz && \\',
-    '',
     'FROM agdrone/rgb-plot-base-image:latest',
     'LABEL maintainer="Someone <someone@example.com>"',
     '',
